@@ -189,7 +189,7 @@ func TestConcurrentUsage(t *testing.T) {
 	// Check if Redis is actually available
 	if err := provider.HealthCheck(ctx, testURL); err != nil {
 		provider.Close()
-		// In CI with Redis service, this should work - fail the test
+		// Skip if Redis not available, unless we expect it to be (CI with Redis service)
 		if os.Getenv("REDIS_AVAILABLE") == "true" {
 			t.Fatalf("Redis should be available in CI but health check failed: %v", err)
 		}

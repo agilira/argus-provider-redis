@@ -228,7 +228,7 @@ func TestArgusCompatibility_ConcurrentUsage(t *testing.T) {
 		if strings.Contains(errMsg, "[CONNECTION_ERROR]:") ||
 			strings.Contains(errMsg, "[CONNECTION_UNHEALTHY]:") ||
 			strings.Contains(errMsg, "[REDIS_ERROR]:") {
-			// In CI with Redis service, this should work - fail the test
+			// Skip if Redis not available, unless we expect it to be (CI with Redis service)
 			if os.Getenv("REDIS_AVAILABLE") == "true" {
 				t.Fatalf("Redis should be available in CI but connection failed: %v", err)
 			}
