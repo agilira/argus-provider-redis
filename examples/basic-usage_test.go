@@ -215,6 +215,10 @@ func TestBasicUsageExampleCompilation(t *testing.T) {
 
 // TestBasicUsageExampleWithoutRedis tests the example behavior when Redis is not available
 func TestBasicUsageExampleWithoutRedis(t *testing.T) {
+	if testing.Short() {
+		t.Skip("Skipping example execution test in short mode")
+	}
+
 	// Check if Redis is available first - if it is, skip this test
 	client := redis.NewClient(&redis.Options{
 		Addr: "localhost:6379",

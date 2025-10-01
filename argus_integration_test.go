@@ -14,7 +14,7 @@ func TestArgusIntegration(t *testing.T) {
 	if testing.Short() {
 		t.Skip("Skipping Redis integration test in short mode")
 	}
-	
+
 	// This test simulates the full Argus integration workflow
 	ctx := context.Background()
 
@@ -177,7 +177,7 @@ func TestConcurrentUsage(t *testing.T) {
 	if testing.Short() {
 		t.Skip("Skipping concurrent usage test in short mode")
 	}
-	
+
 	provider, err := NewProvider("redis://localhost:6379")
 	if err != nil {
 		t.Skipf("Redis not available: %v", err)

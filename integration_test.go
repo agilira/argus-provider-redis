@@ -27,7 +27,7 @@ func TestRealRedisConnection(t *testing.T) {
 	if testing.Short() {
 		t.Skip("Skipping real Redis connection test in short mode")
 	}
-	
+
 	// Skip if no Redis available
 	provider, err := NewProvider("redis://localhost:6379")
 	if err != nil {
@@ -70,7 +70,7 @@ func TestRealRedisWatch(t *testing.T) {
 	if testing.Short() {
 		t.Skip("Skipping real Redis watch test in short mode")
 	}
-	
+
 	provider, err := NewProvider("redis://localhost:6379")
 	if err != nil {
 		t.Skipf("Redis not available: %v", err)
