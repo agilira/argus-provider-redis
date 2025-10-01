@@ -115,8 +115,8 @@ func TestBasicUsageExample(t *testing.T) {
 
 	// Check that security validations are working
 	securityPatterns := []string{
-		"Security working:",              // Should appear multiple times for different security blocks
-		"Security test complete:",        // Should show dangerous patterns blocked
+		"Security working:",       // Should appear multiple times for different security blocks
+		"Security test complete:", // Should show dangerous patterns blocked
 	}
 
 	for _, pattern := range securityPatterns {
