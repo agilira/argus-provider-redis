@@ -21,6 +21,10 @@ import (
 
 // simulateArgusWorkflow simulates the complete Argus workflow with Redis provider
 func TestRealWorld_FullArgusWorkflow(t *testing.T) {
+	if testing.Short() {
+		t.Skip("Skipping full workflow test in short mode")
+	}
+	
 	// 1. Application startup: register Redis provider (simulates import _ "argus-provider-redis")
 	provider, err := NewProvider("redis://localhost:6379")
 	if err != nil {

@@ -13,6 +13,18 @@ jobs:
   test:
     name: Test Suite
     runs-on: ubuntu-latest
+    
+    services:
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+          
     steps:
     - name: Checkout
       uses: actions/checkout@v4
@@ -22,6 +34,18 @@ jobs:
       with:
         go-version: 'stable'
         cache: true
+
+    - name: Wait for Redis
+      run: |
+        echo "Waiting for Redis to be ready..."
+        timeout 30s bash -c 'until redis-cli ping; do sleep 1; done'
+        echo "Redis is ready!"
+        echo "Testing Redis connection:"
+        redis-cli ping
+        redis-cli set test-key "test-value"
+        redis-cli get test-key
+        redis-cli del test-key
+        echo "Redis is working correctly!"
 
     - name: Install Dependencies
       run: |
@@ -50,6 +74,9 @@ jobs:
         echo "Security scan completed"
 
     - name: Test with Race Detection
+      env:
+        REDIS_AVAILABLE: "true"
+        REDIS_URL: "redis://localhost:6379"
       run: go test -race -timeout 5m -v ./...
 
     - name: Test Coverage
