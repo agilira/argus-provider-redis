@@ -42,7 +42,7 @@ The official high-performance [Redis](https://redis.io) provider for [Argus](htt
 
 ## Compatibility and Support
 
-argus-provider-redis is designed to work with Consul 9+ and follows Long-Term Support guidelines to ensure consistent performance across production deployments.
+argus-provider-redis is designed to work with Redis 9+ and follows Long-Term Support guidelines to ensure consistent performance across production deployments.
 
 ## Installation
 
