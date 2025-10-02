@@ -1,27 +1,32 @@
-# Argus Provider Redis
+# argus-provider-redis: Argus remote provider for Redis
+### an AGILira library
 
-![Go Version](https://img.shields.io/badge/go-1.25%2B-blue)
-![License](https://img.shields.io/badge/license-MPL--2.0-green)
-![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
+The official high-performance [Redis](https://redis.io) provider for [Argus](https://github.com/agilira/argus). Provides real-time configuration loading, live watching capabilities, and professional-grade security features for production environments.
 
-A high-performance Redis remote configuration provider for the Argus configuration management system.
+[![CI](https://github.com/agilira/argus-provider-redis/actions/workflows/ci.yml/badge.svg)](https://github.com/agilira/argus-provider-redis/actions/workflows/ci.yml)
+[![Security](https://img.shields.io/badge/Security-gosec-brightgreen)](https://github.com/agilira/argus-provider-redis/actions/workflows/ci.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/agilira/argus-provider-redis?v=2)](https://goreportcard.com/report/github.com/agilira/argus-provider-redis)
+[![Coverage](https://codecov.io/gh/agilira/argus-provider-redis/branch/main/graph/badge.svg)](https://codecov.io/gh/agilira/argus-provider-redis)
+[![Made For Argus](https://img.shields.io/badge/Made_for-Argus-87CEEB)](https://github.com/agilira/argus)
+
+**[Features](#features) • [Installation](#installation) • [Quick Start](#quick-start) • [Advanced Configuration](#advanced-configuration) • [Security Features](#security-features) • [Performance](#performance-optimizations) • [Monitoring](#monitoring)**
 
 ## Features
 
-🚀 **High Performance**
+**High Performance**
 - Pre-compiled security patterns for zero-allocation validation
 - Efficient connection pooling with configurable limits
 - Atomic counters for real-time metrics
 - Optimized watch mechanism using Redis pub/sub
 
-🔒 **Security First**
+**Security First**
 - Redis injection prevention
 - Forbidden command detection  
 - URL validation and normalization
 - Response size limits (DoS protection)
 - Concurrent request limits
 
-🏗️ **Redis Support**
+**Redis Support**
 - Standalone Redis servers
 - Redis Cluster mode
 - Redis Sentinel
@@ -29,11 +34,15 @@ A high-performance Redis remote configuration provider for the Argus configurati
 - TLS/SSL encrypted connections
 - Authentication support
 
-📊 **Monitoring & Observability**
+**Monitoring & Observability**
 - Real-time performance metrics
 - Health check endpoints
 - Connection status monitoring
 - Request/error counters
+
+## Compatibility and Support
+
+argus-provider-redis is designed to work with Consul 9+ and follows Long-Term Support guidelines to ensure consistent performance across production deployments.
 
 ## Installation
 
@@ -215,32 +224,10 @@ Supported Redis connection URLs:
 - `redis://node1:6379,node2:6379,node3:6379` - Cluster mode
 - `unix:///tmp/redis.sock` - Unix socket
 
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Add tests for new functionality
-4. Ensure all tests pass
-5. Submit a pull request
-
 ## License
 
-This project is licensed under the Mozilla Public License 2.0 - see the [LICENSE](LICENSE) file for details.
-
-## Related Projects
-
-- [Argus](https://github.com/agilira/argus) - Main configuration management system
-- [Argus Provider Consul](https://github.com/agilira/argus-provider-consul) - Consul provider
-- [go-errors](https://github.com/agilira/go-errors) - Structured error handling
-
-## Support
-
-For questions and support:
-- Create an issue on GitHub
-- Check the documentation in `doc.go`
-- Review the examples in the `examples/` directory
+Mozilla Public License 2.0 - see the [LICENSE](LICENSE.md) file for details.
 
 ---
 
-**AGILira Series** - A. Giordano  
-Copyright (c) 2025 - Licensed under MPL-2.0
+argus-provider-redis • an AGILira library
