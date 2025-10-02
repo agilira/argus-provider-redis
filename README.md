@@ -6,8 +6,7 @@ The official high-performance [Redis](https://redis.io) provider for [Argus](htt
 [![CI](https://github.com/agilira/argus-provider-redis/actions/workflows/ci.yml/badge.svg)](https://github.com/agilira/argus-provider-redis/actions/workflows/ci.yml)
 [![Security](https://img.shields.io/badge/Security-gosec-brightgreen)](https://github.com/agilira/argus-provider-redis/actions/workflows/ci.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/agilira/argus-provider-redis?v=2)](https://goreportcard.com/report/github.com/agilira/argus-provider-redis)
-[![Coverage](https://codecov.io/gh/agilira/argus-provider-redis/branch/main/graph/badge.svg)](https://codecov.io/gh/agilira/argus-provider-redis)
-[![Made For Argus](https://img.shields.io/badge/Made_for-Argus-87CEEB)](https://github.com/agilira/argus)
+[![Made For Argus](https://img.shields.io/badge/Made_for-Argus-AFEEEE)](https://github.com/agilira/argus)
 
 **[Features](#features) • [Installation](#installation) • [Quick Start](#quick-start) • [Advanced Configuration](#advanced-configuration) • [Security Features](#security-features) • [Performance](#performance-optimizations) • [Monitoring](#monitoring)**
 
@@ -19,7 +18,8 @@ The official high-performance [Redis](https://redis.io) provider for [Argus](htt
 - Atomic counters for real-time metrics
 - Optimized watch mechanism using Redis pub/sub
 
-**Security First**
+**Securite by Design**
+- Red-team tested
 - Redis injection prevention
 - Forbidden command detection  
 - URL validation and normalization
