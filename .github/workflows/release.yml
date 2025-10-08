@@ -1,0 +1,139 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.25'
+
+    - name: Install development tools
+      run: make tools
+
+    - name: Run tests
+      run: make test
+
+    - name: Run security checks
+      run: make security
+
+    - name: Run fuzz tests
+      run: make fuzz
+
+    - name: Generate coverage report
+      run: make coverage
+
+    - name: Create source archive
+      run: |
+        mkdir -p dist
+        
+        # Create source tarball excluding .git and other unnecessary files
+        tar --exclude='.git' --exclude='dist' --exclude='*.log' --exclude='coverage.*' \
+            -czf dist/argus-provider-redis-${{ github.ref_name }}-source.tar.gz .
+        
+        # Create checksums
+        cd dist
+        sha256sum * > checksums.txt
+
+    - name: Generate build provenance attestation
+      uses: actions/attest-build-provenance@v1
+      with:
+        subject-path: 'dist/*'
+
+    - name: Generate SBOM
+      run: |
+        # Generate SBOM from Go modules using syft
+        curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
+        /usr/local/bin/syft . -o spdx-json=sbom.json
+        
+    - name: Generate SBOM attestation  
+      uses: actions/attest-sbom@v1
+      with:
+        subject-path: 'dist/*'
+        sbom-path: 'sbom.json'
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          dist/*
+          coverage.html
+        body: |
+          ## Argus Redis Provider ${{ github.ref_name }}
+          
+          Official Redis configuration provider for the Argus dynamic configuration framework.
+          
+          ### Installation
+          
+          ```bash
+          go get github.com/agilira/argus-provider-redis@${{ github.ref_name }}
+          ```
+          
+          ### Features
+          
+          - ✅ **High-Performance Redis Integration**: Enterprise-ready Redis integration
+          - ✅ **Zero-Allocation Performance**: Optimized for high-throughput applications
+          - ✅ **Real-time Configuration**: Live configuration updates with pub/sub capabilities
+          - ✅ **Production Security**: Comprehensive fuzz testing and Redis command injection prevention
+          - ✅ **Redis Cluster Support**: Full Redis cluster and sentinel support
+          - ✅ **Type Safety**: Full Go type system integration
+          
+          ### Basic Usage
+          
+          ```go
+          import "github.com/agilira/argus-provider-redis"
+          
+          // Load configuration from Redis
+          config, err := redisprovider.Load("redis://localhost:6379/config:app")
+          if err != nil {
+              log.Fatal(err)
+          }
+          
+          // Use with Argus framework
+          err = argus.LoadFromProvider(redisprovider.New("localhost:6379"))
+          ```
+          
+          ### Security Features
+          
+          - 🛡️ **Redis Command Injection Prevention**: Prevents FLUSHDB, EVAL, CONFIG attacks
+          - 🛡️ **Key Validation**: Secure Redis key parsing and validation
+          - 🛡️ **URL Injection Prevention**: Secure Redis URL parsing
+          - 🛡️ **Binary Data Safety**: Secure handling of Redis binary data
+          - 🛡️ **Fuzz Tested**: Comprehensive security fuzz testing coverage
+          
+          ### Verification
+          
+          Verify release authenticity using GitHub CLI:
+          ```bash
+          gh attestation verify ./argus-provider-redis-* --owner agilira
+          ```
+          
+          ### Compatibility
+          
+          - **Go Version**: 1.25+
+          - **Redis Version**: 6.0+
+          - **Redis Cluster**: Fully supported
+          - **Argus Framework**: Compatible with latest Argus releases
+          
+          ### Changes
+          
+          See [CHANGELOG.md](https://github.com/agilira/argus-provider-redis/blob/main/CHANGELOG.md) for detailed changes.
+        generate_release_notes: true
+        draft: false
+        prerelease: false

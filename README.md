@@ -4,6 +4,7 @@
 The official high-performance [Redis](https://redis.io) provider for [Argus](https://github.com/agilira/argus). Provides real-time configuration loading, live watching capabilities, and professional-grade security features for production environments.
 
 [![CI](https://github.com/agilira/argus-provider-redis/actions/workflows/ci.yml/badge.svg)](https://github.com/agilira/argus-provider-redis/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/agilira/argus-provider-redis/actions/workflows/codeql.yml/badge.svg)](https://github.com/agilira/argus-provider-redis/actions/workflows/codeql.yml)
 [![Security](https://img.shields.io/badge/Security-gosec-brightgreen)](https://github.com/agilira/argus-provider-redis/actions/workflows/ci.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/agilira/argus-provider-redis?v=2)](https://goreportcard.com/report/github.com/agilira/argus-provider-redis)
 [![Made For Argus](https://img.shields.io/badge/Made_for-Argus-AFEEEE)](https://github.com/agilira/argus)
