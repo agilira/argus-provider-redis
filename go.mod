@@ -4,7 +4,7 @@ go 1.25
 
 require (
 	github.com/agilira/go-errors v1.1.0
-	github.com/redis/go-redis/v9 v9.14.0
+	github.com/redis/go-redis/v9 v9.14.1
 )
 
 require (
